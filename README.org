@@ -1,0 +1,17 @@
+* A maven plugin to convert XSD schemas to RNG schemas
+
+This project contains a maven plugin for converting XSD schema files into Relax-NG schema files.
+
+It uses [[https://github.com/kohsuke/msv][Kohsuke Kawaguchi's Multi Schema Validator]] (aka. "The Sun schema converter") to do the conversion.
+
+I had planned to use the [[http://www.mojohaus.org/exec-maven-plugin/java-mojo.html][exec-maven-plugin exec:java]] goal to run the [[https://github.com/kohsuke/msv/blob/master/rngconverter/src/main/java/com/sun/msv/writer/relaxng/Driver.java#L31][RNGCOnverter main]], but that would only let me convert a single XSD file per maven project (or per POM execution configuration).  And using the [[http://maven.apache.org/plugins/maven-antrun-plugin/][maven-antrun-plugin]] seemed like it would be as much work as simply writing a mojo.
+
+So writing a new mojo is what I did.
+
+** Status
+
+Banners for travis build and maven central (and maybe coveralls) will go here
+
+** Using the plugin
+
+Usage example will go here
