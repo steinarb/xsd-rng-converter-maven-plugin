@@ -15,3 +15,9 @@ Banners for travis build and maven central (and maybe coveralls) will go here
 ** Using the plugin
 
 Usage example will go here
+
+** License
+
+The xsd-rng-converter-maven-plugin is licensed under the Apache license v. 2.
+
+See the LICENSE file for details.
