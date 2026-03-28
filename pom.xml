@@ -33,7 +33,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testOutputDirectory>${project.build.testOutputDirectory}/rng</testOutputDirectory>
-        <msv.version>2013.6.1</msv.version>
+        <msv.version>2022.7</msv.version>
     </properties>
 
     <dependencies>
