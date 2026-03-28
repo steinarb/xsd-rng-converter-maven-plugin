@@ -33,7 +33,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testOutputDirectory>${project.build.testOutputDirectory}/rng</testOutputDirectory>
-        <msv.version>2022.7</msv.version>
     </properties>
 
     <dependencyManagement>
@@ -58,7 +57,6 @@
         <dependency>
             <groupId>net.java.dev.msv</groupId>
             <artifactId>msv-rngconverter</artifactId>
-            <version>${msv.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
