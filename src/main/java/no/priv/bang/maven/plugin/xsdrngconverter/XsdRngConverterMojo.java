@@ -43,7 +43,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         createRngOutputDirectory();
-        List<File> xsdFiles = findXsdFiles();
+        var xsdFiles = findXsdFiles();
         convertXsdFilesToRngFiles(xsdFiles);
     }
 
@@ -51,7 +51,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
         try {
             Files.createDirectories(Paths.get(rngOutputDirectory));
         } catch (IOException e) {
-            String message = String.format("Caught exception creating directory %s", rngOutputDirectory);
+            var message = String.format("Caught exception creating directory %s", rngOutputDirectory);
             throw new MojoExecutionException(message, e);
         }
     }
@@ -60,13 +60,13 @@ public class XsdRngConverterMojo extends AbstractMojo {
         PrintStream origOut = System.out;
         try {
             for (File xsdFile : xsdFiles) {
-                File rngFile = convertXsdFileNameToRngFileName(xsdFile);
+                var rngFile = convertXsdFileNameToRngFileName(xsdFile);
                 try(PrintStream rngStream = new PrintStream(rngFile)) {
                     String[] args = { xsdFile.getAbsolutePath() };
                     System.setOut(rngStream);
                     Driver.main(args);
                 } catch (Exception e) {
-                    String message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile.toString());
+                    var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile.toString());
                     throw new MojoExecutionException(message, e);
                 }
             }
@@ -76,13 +76,13 @@ public class XsdRngConverterMojo extends AbstractMojo {
     }
 
     List<File> findXsdFiles() {
-        File xsdDirectory = new File(xsdInputDirectory);
+        var xsdDirectory = new File(xsdInputDirectory);
         return Arrays.asList(xsdDirectory.listFiles(xsdFileFilter));
     }
 
     File convertXsdFileNameToRngFileName(File xsdFile) {
-        File outputDirectory = new File(rngOutputDirectory);
-        String localFile = xsdFile.getName().replace(".xsd", ".rng");
+        var outputDirectory = new File(rngOutputDirectory);
+        var localFile = xsdFile.getName().replace(".xsd", ".rng");
         return new File(outputDirectory, localFile);
     }
 
