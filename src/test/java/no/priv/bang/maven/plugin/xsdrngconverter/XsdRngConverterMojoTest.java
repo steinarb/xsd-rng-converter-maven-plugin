@@ -10,8 +10,8 @@ import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class XsdRngConverterMojoTest {
     final static FilenameFilter rngFileFilter = new FilenameFilter() {
@@ -22,7 +22,7 @@ public class XsdRngConverterMojoTest {
     };
     private static Properties testProperties;
 
-    @BeforeClass
+    @BeforeAll
     public static void readTestProperties() throws IOException {
         testProperties = new Properties();
         testProperties.load(XsdRngConverterMojoTest.class.getClassLoader().getResourceAsStream("test.properties"));
