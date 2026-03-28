@@ -42,7 +42,6 @@ public class XsdRngConverterMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        //Locale.setDefault(Locale.ROOT);
         createRngOutputDirectory();
         List<File> xsdFiles = findXsdFiles();
         convertXsdFilesToRngFiles(xsdFiles);
