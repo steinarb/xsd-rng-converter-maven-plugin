@@ -16,11 +16,11 @@ import org.junit.Test;
 
 public class XsdRngConverterMojoTest {
     final static FilenameFilter rngFileFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".rng");
-            }
-        };
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(".rng");
+        }
+    };
     private static Properties testProperties;
 
     @BeforeClass

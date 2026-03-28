@@ -22,11 +22,11 @@ import com.sun.msv.writer.relaxng.Driver;
  */
 public class XsdRngConverterMojo extends AbstractMojo {
     private final FilenameFilter xsdFileFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".xsd");
-            }
-        };
+        @Override
+        public boolean accept(File dir, String name) {
+            return name.endsWith(".xsd");
+        }
+    };
 
     /**
      * Location of the directory scanned for XSD files.
