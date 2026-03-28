@@ -1,7 +1,7 @@
 package no.priv.bang.maven.plugin.xsdrngconverter;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -34,7 +34,7 @@ public class XsdRngConverterMojoTest {
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
 
         var xsdFiles = mojo.findXsdFiles();
-        assertEquals(1, xsdFiles.size());
+        assertThat(xsdFiles).hasSize(1);
     }
 
     @Test
@@ -45,8 +45,7 @@ public class XsdRngConverterMojoTest {
         var xsdFiles = mojo.findXsdFiles();
 
         var rngFile = mojo.convertXsdFileNameToRngFileName(xsdFiles.get(0));
-
-        assertThat(rngFile.getName(), endsWith(".rng"));
+        assertThat(rngFile.getName()).endsWith(".rng");
     }
 
     @Test
@@ -58,7 +57,7 @@ public class XsdRngConverterMojoTest {
         mojo.execute();
 
         var rngFiles = new File(mojo.rngOutputDirectory).listFiles(rngFileFilter);
-        assertEquals(1, rngFiles.length);
+        assertThat(rngFiles).hasSize(1);
     }
 
 }
