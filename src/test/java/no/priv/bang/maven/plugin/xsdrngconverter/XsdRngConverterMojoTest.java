@@ -89,4 +89,16 @@ class XsdRngConverterMojoTest {
         assertThrows(MojoExecutionException.class, () -> mojo.execute());
     }
 
+    @Test
+    void testConvertXsdFilesToRngFilesOnFileNotActuallyXsd() throws Exception {
+        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("not_xsd/not_actually.xsd").getFile()).getParent();
+        mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
+
+        mojo.execute();
+
+        var rngFiles = new File(mojo.rngOutputDirectory).listFiles(rngFileFilter);
+        assertThat(rngFiles).hasSize(1);
+    }
+
 }
