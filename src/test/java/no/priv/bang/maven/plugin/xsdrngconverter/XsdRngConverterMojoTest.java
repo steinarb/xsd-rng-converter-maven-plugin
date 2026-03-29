@@ -2,6 +2,7 @@ package no.priv.bang.maven.plugin.xsdrngconverter;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -58,6 +59,14 @@ class XsdRngConverterMojoTest {
 
         var rngFiles = new File(mojo.rngOutputDirectory).listFiles(rngFileFilter);
         assertThat(rngFiles).hasSize(1);
+    }
+
+    @Test
+    void testMojoWithErrorOnTargetDirectoryCreate() throws Exception {
+        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        mojo.rngOutputDirectory = "/not/found/dummy/directory";
+
+        assertThrows(MojoExecutionException.class, () -> mojo.execute());
     }
 
 }
