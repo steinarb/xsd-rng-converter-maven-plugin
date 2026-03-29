@@ -13,7 +13,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class XsdRngConverterMojoTest {
+class XsdRngConverterMojoTest {
     final static FilenameFilter rngFileFilter = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String name) {
@@ -23,13 +23,13 @@ public class XsdRngConverterMojoTest {
     private static Properties testProperties;
 
     @BeforeAll
-    public static void readTestProperties() throws IOException {
+    static void readTestProperties() throws IOException {
         testProperties = new Properties();
         testProperties.load(XsdRngConverterMojoTest.class.getClassLoader().getResourceAsStream("test.properties"));
     }
 
     @Test
-    public void testFindXsdFiles() {
+    void testFindXsdFiles() {
         var mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
 
@@ -38,7 +38,7 @@ public class XsdRngConverterMojoTest {
     }
 
     @Test
-    public void testConvertXsdFileNameToRngFileName() {
+    void testConvertXsdFileNameToRngFileName() {
         var mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
@@ -49,7 +49,7 @@ public class XsdRngConverterMojoTest {
     }
 
     @Test
-    public void testConvertXsdFilesToRngFiles() throws MojoExecutionException, MojoFailureException {
+    void testConvertXsdFilesToRngFiles() throws MojoExecutionException, MojoFailureException {
         XsdRngConverterMojo mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
