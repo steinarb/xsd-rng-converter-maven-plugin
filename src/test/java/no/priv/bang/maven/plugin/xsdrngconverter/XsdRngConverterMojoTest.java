@@ -6,11 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +22,7 @@ class XsdRngConverterMojoTest {
     private static Properties testProperties;
 
     @BeforeAll
-    static void readTestProperties() throws IOException {
+    static void readTestProperties() throws Exception {
         testProperties = new Properties();
         testProperties.load(XsdRngConverterMojoTest.class.getClassLoader().getResourceAsStream("test.properties"));
     }
@@ -50,7 +48,7 @@ class XsdRngConverterMojoTest {
     }
 
     @Test
-    void testConvertXsdFilesToRngFiles() throws MojoExecutionException, MojoFailureException {
+    void testConvertXsdFilesToRngFiles() throws Exception {
         XsdRngConverterMojo mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
