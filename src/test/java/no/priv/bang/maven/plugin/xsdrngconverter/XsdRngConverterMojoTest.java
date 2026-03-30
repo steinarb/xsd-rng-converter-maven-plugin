@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class XsdRngConverterMojoTest {
@@ -25,6 +26,17 @@ class XsdRngConverterMojoTest {
     static void readTestProperties() throws Exception {
         testProperties = new Properties();
         testProperties.load(XsdRngConverterMojoTest.class.getClassLoader().getResourceAsStream("test.properties"));
+    }
+
+    @BeforeEach
+    void cleanOutputDirectoryBetweenTests() {
+        var outputDirectory = new File(testProperties.getProperty("testOutputDirectory"));
+        var filesToDelete = outputDirectory.listFiles();
+        if (filesToDelete != null) {
+            for (var file: filesToDelete) {
+                file.delete();
+            }
+        }
     }
 
     @Test
