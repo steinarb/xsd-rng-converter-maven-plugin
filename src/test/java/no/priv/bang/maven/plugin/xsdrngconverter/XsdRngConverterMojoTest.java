@@ -2,16 +2,19 @@ package no.priv.bang.maven.plugin.xsdrngconverter;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Properties;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Document;
 
 class XsdRngConverterMojoTest {
     final static FilenameFilter rngFileFilter = new FilenameFilter() {
@@ -69,6 +72,13 @@ class XsdRngConverterMojoTest {
 
         var rngFiles = new File(mojo.rngOutputDirectory).listFiles(rngFileFilter);
         assertThat(rngFiles).hasSize(1);
+        assertDoesNotThrow(() -> parseXmlFile(rngFiles[0])); // Verify generated file is XML file
+    }
+
+    private Document parseXmlFile(File file) throws Exception {
+        var factory = DocumentBuilderFactory.newInstance();
+        var builder = factory.newDocumentBuilder();
+        return builder.parse(file);
     }
 
     @Test
