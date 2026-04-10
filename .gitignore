@@ -1,6 +1,6 @@
+.DS_Store
 .classpath
 .project
-.vscode/
 .settings/
+.vscode/
 target/
-.DS_Store
