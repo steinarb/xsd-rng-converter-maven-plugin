@@ -1,4 +1,6 @@
 .classpath
 .project
+.vscode/
 .settings/
 target/
+.DS_Store
