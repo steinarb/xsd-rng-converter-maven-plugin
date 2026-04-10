@@ -56,13 +56,13 @@
     <dependencies>
         <dependency>
             <groupId>net.java.dev.msv</groupId>
-            <artifactId>msv-rngconverter</artifactId><!--
+            <artifactId>msv-rngconverter</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
             <version>2022.8-SNAPSHOT</version>
         </dependency>
         <dependency>
