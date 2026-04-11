@@ -21,10 +21,8 @@
                 <version>@project.version@</version>
                 <executions>
                     <execution>
-                        <id>touch</id>
-                        <phase>validate</phase>
                         <goals>
-                            <goal>touch</goal>
+                            <goal>convert</goal>
                         </goals>
                     </execution>
                 </executions>
