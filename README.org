@@ -14,7 +14,53 @@ Banners for travis build and maven central (and maybe coveralls) will go here
 
 ** Using the plugin
 
-Usage example will go here
+Prerequisites
+ - Java 21.0.10 or newer
+ - Apache maven installed somewhere in PATH
+
+Procedure:
+ 1. Create a directory to work in
+    #+begin_example
+      mkdir /tmp/xsdconvert
+    #+end_example
+ 2. Create a minimal pom =/tmp/xsdconvert/pom.xml=
+    #+begin_src xml
+      <project>
+          <modelVersion>4.0.0</modelVersion>
+
+          <groupId>xsdconvert</groupId>
+          <artifactId>xsdconvert</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+
+          <build>
+              <plugins>
+                  <plugin>
+                      <groupId>no.priv.bang.maven.plugin</groupId>
+                      <artifactId>xsd-rng-converter-maven-plugin</artifactId>
+                      <version>1.0.0-SNAPSHOT</version>
+                      <executions>
+                          <execution>
+                              <goals>
+                                  <goal>convert</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                  </plugin>
+              </plugins>
+          </build>
+      </project>
+    #+end_src
+ 3. Put the files to be converted in the =src/main/xsd= subdirectory of the directory of the =pom.xml= file
+    #+begin_example
+      mkdir -p /tmp/xsdconvert/src/main/xsd
+      cp *.xsd /tmp/xsdconvert/src/main/xsd/
+    #+end_example
+ 4. Do the conversion
+    #+begin_example
+      cd /tmp/xsdconvert/
+      mvn verify
+    #+end_example
+ 5. The Relax-NG schemas converted from XSD schemas in =/tmp/xsdconvert/src/main/xsd/= can now be found in =/home/xsdconvert/target/classes/rng/=
 
 ** License
 
