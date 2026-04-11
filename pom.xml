@@ -32,6 +32,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <testOutputDirectory>${project.build.testOutputDirectory}/rng</testOutputDirectory>
+        <testRncOutputDirectory>${project.build.testOutputDirectory}/rnc</testRncOutputDirectory>
     </properties>
 
     <dependencyManagement>
@@ -63,6 +64,16 @@
                 </exclusion>
             </exclusions>
             <version>2022.8-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.relaxng</groupId>
+            <artifactId>trang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.relaxng</groupId>
+            <artifactId>jing</artifactId>
+            <version>20241231</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>

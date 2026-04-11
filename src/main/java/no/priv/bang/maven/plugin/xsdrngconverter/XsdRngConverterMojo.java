@@ -26,22 +26,31 @@ public class XsdRngConverterMojo extends AbstractMojo {
     private final FilenameFilter xsdFileFilter = (dir, name) -> name.endsWith(".xsd");
 
     /**
-     * Location of the directory scanned for XSD files.
+     * Location of directory scanned for XSD files.
      */
-    @Parameter(defaultValue = "${project.basedir}/src/main/xsd", property = "xsdInputDirectory", required = true )
+    @Parameter(defaultValue = "${project.basedir}/src/main/xsd", property = "xsd.input.directory", required = true )
     String xsdInputDirectory;
 
     /**
-     * Location of the directory where the generated RNG files are put
+     * Location of destination directory for generated RNG files (Relax-NG XML notation schema files)
      */
-    @Parameter(defaultValue = "${project.build.outputDirectory}/rng", property = "rngOutputDirectory", required = true )
+    @Parameter(defaultValue = "${project.build.outputDirectory}/rng", property = "rng.output.directory", required = true )
     String rngOutputDirectory;
+
+    /**
+     * Location of destination directory for generated RNC files (Relax-NG compact notation schema files)
+     */
+    @Parameter(defaultValue = "${project.build.outputDirectory}/rnc", property = "rnc.output.directory", required = true )
+    String rncOutputDirectory;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         createRngOutputDirectory();
         var xsdFiles = findXsdFiles();
         convertXsdFilesToRngFiles(xsdFiles);
+        var rngFiles = xsdFiles.stream().map(f -> convertXsdFileNameToRngFileName(f)).toList();
+        createRncOutputDirectory();
+        convertRngFilesToRncFiles(rngFiles);
     }
 
     private void createRngOutputDirectory() throws MojoExecutionException {
@@ -49,6 +58,15 @@ public class XsdRngConverterMojo extends AbstractMojo {
             Files.createDirectories(Paths.get(rngOutputDirectory));
         } catch (IOException e) {
             var message = String.format("Caught exception creating directory %s", rngOutputDirectory);
+            throw new MojoExecutionException(message, e);
+        }
+    }
+
+    private void createRncOutputDirectory() throws MojoExecutionException {
+        try {
+            Files.createDirectories(Paths.get(rncOutputDirectory));
+        } catch (IOException e) {
+            var message = String.format("Caught exception creating directory %s", rncOutputDirectory);
             throw new MojoExecutionException(message, e);
         }
     }
@@ -66,6 +84,18 @@ public class XsdRngConverterMojo extends AbstractMojo {
         }
     }
 
+    int convertRngFilesToRncFiles(List<File> rngFiles) throws MojoExecutionException {
+        var trangDriver = new com.thaiopensource.relaxng.translate.Driver();
+        int conversionStatus = 0;
+        for (File rngFile : rngFiles) {
+            var rncFile = convertRngFileNameToRncFileName(rngFile).getAbsolutePath();
+            String[] args = { rngFile.getAbsolutePath(), rncFile };
+            conversionStatus += trangDriver.run(args);
+        }
+
+        return conversionStatus;
+    }
+
     List<File> findXsdFiles() {
         var xsdDirectory = new File(xsdInputDirectory);
         return Arrays.asList(xsdDirectory.listFiles(xsdFileFilter));
@@ -74,6 +104,12 @@ public class XsdRngConverterMojo extends AbstractMojo {
     File convertXsdFileNameToRngFileName(File xsdFile) {
         var outputDirectory = new File(rngOutputDirectory);
         var localFile = xsdFile.getName().replace(".xsd", ".rng");
+        return new File(outputDirectory, localFile);
+    }
+
+    File convertRngFileNameToRncFileName(File rngFile) {
+        var outputDirectory = new File(rncOutputDirectory);
+        var localFile = rngFile.getName().replace(".rng", ".rnc");
         return new File(outputDirectory, localFile);
     }
 
