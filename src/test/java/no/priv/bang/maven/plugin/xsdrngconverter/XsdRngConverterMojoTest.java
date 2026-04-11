@@ -86,7 +86,7 @@ class XsdRngConverterMojoTest {
         XsdRngConverterMojo mojo = new XsdRngConverterMojo();
         mojo.rngOutputDirectory = "/not/found/dummy/directory";
 
-        assertThrows(MojoExecutionException.class, () -> mojo.execute());
+        assertThrows(MojoExecutionException.class, mojo::execute);
     }
 
     @Test
@@ -95,7 +95,7 @@ class XsdRngConverterMojoTest {
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("not_xsd/not_actually.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
 
-        assertThrows(MojoExecutionException.class, () -> mojo.execute());
+        assertThrows(MojoExecutionException.class, mojo::execute);
     }
 
 }
