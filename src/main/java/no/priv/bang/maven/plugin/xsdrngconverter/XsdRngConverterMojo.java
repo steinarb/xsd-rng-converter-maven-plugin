@@ -62,7 +62,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
                 String[] args = { xsdFile.getAbsolutePath(), rngFile };
                 Driver.main(args);
             } catch (Exception e) {
-                var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile.toString());
+                var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile);
                 throw new MojoExecutionException(message, e);
             }
         }
