@@ -3,7 +3,6 @@ package no.priv.bang.maven.plugin.xsdrngconverter;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -57,20 +56,15 @@ public class XsdRngConverterMojo extends AbstractMojo {
     }
 
     private void convertXsdFilesToRngFiles(List<File> xsdFiles) throws MojoExecutionException {
-        PrintStream origOut = System.out;
-        try {
-            for (File xsdFile : xsdFiles) {
-                var rngFile = convertXsdFileNameToRngFileName(xsdFile).getAbsolutePath();
-                try {
-                    String[] args = { xsdFile.getAbsolutePath(), rngFile };
-                    Driver.main(args);
-                } catch (Exception e) {
-                    var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile.toString());
-                    throw new MojoExecutionException(message, e);
-                }
+        for (File xsdFile : xsdFiles) {
+            var rngFile = convertXsdFileNameToRngFileName(xsdFile).getAbsolutePath();
+            try {
+                String[] args = { xsdFile.getAbsolutePath(), rngFile };
+                Driver.main(args);
+            } catch (Exception e) {
+                var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile.toString());
+                throw new MojoExecutionException(message, e);
             }
-        } finally {
-            System.setOut(origOut);
         }
     }
 
