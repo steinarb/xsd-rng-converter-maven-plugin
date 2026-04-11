@@ -10,6 +10,8 @@ import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import com.sun.msv.writer.relaxng.Driver;
@@ -19,6 +21,7 @@ import com.sun.msv.writer.relaxng.Driver;
  * (aka. "XSD schemas") from an input directory, and writes <a href="http://relaxng.org">Relax-NG</a>
  * versions of same schemas to an output directory.
  */
+@Mojo(name="convert", defaultPhase = LifecyclePhase.VALIDATE)
 public class XsdRngConverterMojo extends AbstractMojo {
     private final FilenameFilter xsdFileFilter = (dir, name) -> name.endsWith(".xsd");
 
