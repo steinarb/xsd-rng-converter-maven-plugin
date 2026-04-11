@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 class XsdRngConverterMojoTest {
-    final static FilenameFilter rngFileFilter = new FilenameFilter() {
+    static final FilenameFilter rngFileFilter = new FilenameFilter() {
         @Override
         public boolean accept(File dir, String name) {
             return name.endsWith(".rng");
