@@ -20,12 +20,7 @@ import com.sun.msv.writer.relaxng.Driver;
  * versions of same schemas to an output directory.
  */
 public class XsdRngConverterMojo extends AbstractMojo {
-    private final FilenameFilter xsdFileFilter = new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-            return name.endsWith(".xsd");
-        }
-    };
+    private final FilenameFilter xsdFileFilter = (dir, name) -> name.endsWith(".xsd");
 
     /**
      * Location of the directory scanned for XSD files.
