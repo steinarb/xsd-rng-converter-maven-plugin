@@ -171,6 +171,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>Apache License version 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Steinar Bang</name>
+            <email>sb@dod.no</email>
+            <url>https://steinar.bang.priv.no/</url>
+            <organization>steinarb-github</organization>
+            <organizationUrl>https://github.com/steinarb</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/steinarb/xsd-rng-converter-maven-plugin</url>
+        <connection>scm:git:https://github.com/steinarb/xsd-rng-converter-maven-plugin.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <url>https://github.com/steinarb/xsd-rng-converter-maven-plugin/issues</url>
+        <system>Github issue tracker</system>
+    </issueManagement>
+
+    <ciManagement>
+        <url>https://github.com/steinarb/xsd-rng-converter-maven-plugin/actions</url>
+        <system>github actions</system>
+    </ciManagement>
+
     <profiles>
         <profile>
             <id>run-its</id>
