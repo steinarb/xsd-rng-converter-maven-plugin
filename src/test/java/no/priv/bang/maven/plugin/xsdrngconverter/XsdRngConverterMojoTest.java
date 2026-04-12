@@ -160,4 +160,34 @@ class XsdRngConverterMojoTest {
         assertThat(mojo.convertRngFilesToRncFiles(List.of(rngFiles))).isNotEqualTo(0);
     }
 
+    @Test
+    void testMaybeStripVersionNumberWhenVersionNumberStrippingDisabled() {
+        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        mojo.noRncVersion = false;
+
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-1.0.rng")).isEqualTo("dbchangelog-1.0.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-3.1.rng")).isEqualTo("dbchangelog-3.1.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-3.10.rng")).isEqualTo("dbchangelog-3.10.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-4.31.rng")).isEqualTo("dbchangelog-4.31.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-5.0.rng")).isEqualTo("dbchangelog-5.0.rng");
+        assertThat(mojo.maybeStripVersionNumber("xhtml1-strict.rng")).isEqualTo("xhtml1-strict.rng");
+        assertThat(mojo.maybeStripVersionNumber("maven-v4_0_0.rng")).isEqualTo("maven-v4_0_0.rng");
+        assertThat(mojo.maybeStripVersionNumber("antproject.rng")).isEqualTo("antproject.rng");
+    }
+
+    @Test
+    void testMaybeStripVersionNumberWhenVersionNumberStrippingEnabled() {
+        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        mojo.noRncVersion = true;
+
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-1.0.rng")).isEqualTo("dbchangelog.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-3.1.rng")).isEqualTo("dbchangelog.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-3.10.rng")).isEqualTo("dbchangelog.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-4.31.rng")).isEqualTo("dbchangelog.rng");
+        assertThat(mojo.maybeStripVersionNumber("dbchangelog-5.0.rng")).isEqualTo("dbchangelog.rng");
+        assertThat(mojo.maybeStripVersionNumber("xhtml1-strict.rng")).isEqualTo("xhtml1-strict.rng");
+        assertThat(mojo.maybeStripVersionNumber("maven-v4_0_0.rng")).isEqualTo("maven-v4_0_0.rng");
+        assertThat(mojo.maybeStripVersionNumber("antproject.rng")).isEqualTo("antproject.rng");
+    }
+
 }

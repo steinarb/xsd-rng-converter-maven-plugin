@@ -43,6 +43,12 @@ public class XsdRngConverterMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.outputDirectory}/rnc", property = "rnc.output.directory", required = true )
     String rncOutputDirectory;
 
+    /**
+     * If true, strip the version number from the filename of the generated RNC files. Defaults to false.
+     */
+    @Parameter(defaultValue = "false", property = "no.rnc.version", required = true )
+    boolean noRncVersion;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         createRngOutputDirectory();
@@ -109,8 +115,16 @@ public class XsdRngConverterMojo extends AbstractMojo {
 
     File convertRngFileNameToRncFileName(File rngFile) {
         var outputDirectory = new File(rncOutputDirectory);
-        var localFile = rngFile.getName().replace(".rng", ".rnc");
+        var localFile = maybeStripVersionNumber(rngFile.getName()).replace(".rng", ".rnc");
         return new File(outputDirectory, localFile);
+    }
+
+    String maybeStripVersionNumber(String filename) {
+        if (!noRncVersion) {
+            return filename;
+        }
+
+        return filename.replaceFirst("-[0-9]+\\.[0-9]+\\.", ".");
     }
 
 }
