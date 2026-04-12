@@ -89,7 +89,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testConvertXsdFilesToRngAndRncFiles() throws Exception {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
         mojo.rncOutputDirectory = testProperties.getProperty("testRncOutputDirectory");
@@ -124,7 +124,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testMojoWithErrorOnTargetDirectoryCreate() {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.rngOutputDirectory = "/not/found/dummy/directory";
 
         assertThrows(MojoExecutionException.class, mojo::execute);
@@ -132,7 +132,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testMojoWithErrorOnRncTargetDirectoryCreate() {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
         mojo.rncOutputDirectory = "/not/found/dummy/directory";
@@ -142,7 +142,7 @@ class XsdRngConverterMojoTest {
 
     @Test
         void testConvertXsdFilesToRngFilesOnFileNotActuallyXsd() {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("not_xsd/not_actually.xsd").getFile()).getParent();
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
 
@@ -151,7 +151,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testConvertRngFilesToRncFilesOnFileNotRng() throws MojoExecutionException {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.rncOutputDirectory = testProperties.getProperty("testRncOutputDirectory");
         var mockRngDirectory = new File(getClass().getClassLoader().getResource("not_rng/not_actually.rng").getFile()).getParent();
         var rngFiles = new File(mockRngDirectory).listFiles(rngFileFilter);
@@ -162,7 +162,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testMaybeStripVersionNumberWhenVersionNumberStrippingDisabled() {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.noRncVersion = false;
 
         assertThat(mojo.maybeStripVersionNumber("dbchangelog-1.0.rng")).isEqualTo("dbchangelog-1.0.rng");
@@ -177,7 +177,7 @@ class XsdRngConverterMojoTest {
 
     @Test
     void testMaybeStripVersionNumberWhenVersionNumberStrippingEnabled() {
-        XsdRngConverterMojo mojo = new XsdRngConverterMojo();
+        var mojo = new XsdRngConverterMojo();
         mojo.noRncVersion = true;
 
         assertThat(mojo.maybeStripVersionNumber("dbchangelog-1.0.rng")).isEqualTo("dbchangelog.rng");
