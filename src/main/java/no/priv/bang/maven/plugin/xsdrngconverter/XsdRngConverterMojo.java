@@ -124,7 +124,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
             return filename;
         }
 
-        return filename.replaceFirst("-[0-9]+\\.[0-9]+\\.", ".");
+        return filename.replaceFirst("-\\d+\\.\\d+\\.", ".");
     }
 
 }
