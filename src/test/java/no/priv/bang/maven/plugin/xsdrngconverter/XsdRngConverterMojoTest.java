@@ -81,7 +81,7 @@ class XsdRngConverterMojoTest {
         mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
         mojo.rncOutputDirectory = testProperties.getProperty("testRncOutputDirectory");
         var xsdFiles = mojo.findXsdFiles();
-        var rngFiles = xsdFiles.stream().map(f -> mojo.convertXsdFileNameToRngFileName(f)).toList();
+        var rngFiles = xsdFiles.stream().map(mojo::convertXsdFileNameToRngFileName).toList();
 
         var rncFile = mojo.convertRngFileNameToRncFileName(rngFiles.get(0));
         assertThat(rncFile.getName()).endsWith(".rnc");

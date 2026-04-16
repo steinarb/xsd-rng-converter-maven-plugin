@@ -54,7 +54,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
         createRngOutputDirectory();
         var xsdFiles = findXsdFiles();
         convertXsdFilesToRngFiles(xsdFiles);
-        var rngFiles = xsdFiles.stream().map(f -> convertXsdFileNameToRngFileName(f)).toList();
+        var rngFiles = xsdFiles.stream().map(this::convertXsdFileNameToRngFileName).toList();
         createRncOutputDirectory();
         convertRngFilesToRncFiles(rngFiles);
     }
