@@ -24,7 +24,7 @@ jobs:
         mkdir -p /home/runner/.m2
         cp .github/workflows/settings.xml /home/runner/.m2
     - name: Build with Maven
-      run: mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent install coveralls:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file pom.xml --define repoToken="$COVERALLS_REPO_TOKEN" -Dsonar.projectKey=steinarb_xsd-rng-converter-maven-plugin -Dsonar.organization=steinarb -Dsonar.host.url=https://sonarcloud.io
+      run: mvn -B -Prun-its org.jacoco:jacoco-maven-plugin:prepare-agent install coveralls:report org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file pom.xml --define repoToken="$COVERALLS_REPO_TOKEN" -Dsonar.projectKey=steinarb_xsd-rng-converter-maven-plugin -Dsonar.organization=steinarb -Dsonar.host.url=https://sonarcloud.io
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_SECRET }}
