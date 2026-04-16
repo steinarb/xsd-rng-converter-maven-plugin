@@ -10,7 +10,24 @@ So writing a new mojo is what I did.
 
 ** Status
 
-Banners for travis build and maven central (and maybe coveralls) will go here
+[[https://github.com/steinarb/xsd-rng-converter-maven-plugin/actions/workflows/xsd-rng-converter-maven-plugin-maven-ci-build.yml][file:https://github.com/steinarb/xsd-rng-converter-maven-plugin/actions/workflows/xsd-rng-converter-maven-plugin-maven-ci-build.yml/badge.svg]]
+[[https://coveralls.io/github/steinarb/xsd-rng-converter-maven-plugin][file:https://coveralls.io/repos/github/steinarb/xsd-rng-converter-maven-plugin/badge.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=alert_status#.svg]]
+[[https://maven-badges.sml.io/sonatype-central/no.priv.bang.xsd-rng-converter-maven-plugin/xsd-rng-converter-maven-plugin][file:https://maven-badges.sml.io/sonatype-central/no.priv.bang.xsd-rng-converter-maven-plugin/xsd-rng-converter-maven-plugin/badge.svg]]
+
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/images/project_badges/sonarcloud-white.svg]]
+
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=sqale_index#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=coverage#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=ncloc#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=code_smells#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=sqale_rating#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=security_rating#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=bugs#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=vulnerabilities#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=duplicated_lines_density#.svg]]
+[[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_authservice&metric=reliability_rating#.svg]]
+
 
 ** Using the plugin
 
