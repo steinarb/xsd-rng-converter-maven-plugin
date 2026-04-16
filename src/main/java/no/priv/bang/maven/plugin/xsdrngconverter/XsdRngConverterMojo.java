@@ -90,7 +90,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
         }
     }
 
-    int convertRngFilesToRncFiles(List<File> rngFiles) throws MojoExecutionException {
+    int convertRngFilesToRncFiles(List<File> rngFiles) {
         var trangDriver = new com.thaiopensource.relaxng.translate.Driver();
         int conversionStatus = 0;
         for (File rngFile : rngFiles) {

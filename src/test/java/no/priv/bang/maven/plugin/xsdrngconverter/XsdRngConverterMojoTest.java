@@ -150,7 +150,7 @@ class XsdRngConverterMojoTest {
     }
 
     @Test
-    void testConvertRngFilesToRncFilesOnFileNotRng() throws MojoExecutionException {
+    void testConvertRngFilesToRncFilesOnFileNotRng() {
         var mojo = new XsdRngConverterMojo();
         mojo.rncOutputDirectory = testProperties.getProperty("testRncOutputDirectory");
         var mockRngDirectory = new File(getClass().getClassLoader().getResource("not_rng/not_actually.rng").getFile()).getParent();
