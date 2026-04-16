@@ -157,7 +157,7 @@ class XsdRngConverterMojoTest {
         var rngFiles = new File(mockRngDirectory).listFiles(rngFileFilter);
 
         // Status code 0 signifies a successful conversion
-        assertThat(mojo.convertRngFilesToRncFiles(List.of(rngFiles))).isNotEqualTo(0);
+        assertThat(mojo.convertRngFilesToRncFiles(List.of(rngFiles))).isNotZero();
     }
 
     @Test
