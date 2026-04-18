@@ -14,8 +14,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-import com.sun.msv.writer.relaxng.Driver;
-
 /**
  * Goal which reads all <a href="https://www.w3.org/XML/Schema">W3C XML schema</a> files
  * (aka. "XSD schemas") from an input directory, and writes <a href="http://relaxng.org">Relax-NG</a>
@@ -82,7 +80,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
             var rngFile = convertXsdFileNameToRngFileName(xsdFile).getAbsolutePath();
             try {
                 String[] args = { xsdFile.getAbsolutePath(), rngFile };
-                Driver.main(args);
+                com.sun.msv.writer.relaxng.Driver.main(args);
             } catch (Exception e) {
                 var message = String.format("Caught exception converting %s to %s", xsdFile.toString(), rngFile);
                 throw new MojoExecutionException(message, e);
