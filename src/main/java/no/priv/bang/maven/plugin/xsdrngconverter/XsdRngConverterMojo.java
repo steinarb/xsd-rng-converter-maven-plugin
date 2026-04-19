@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -24,7 +25,7 @@ public class XsdRngConverterMojo extends AbstractMojo {
     private final FilenameFilter xsdFileFilter = (dir, name) -> name.endsWith(".xsd");
 
     /**
-     * Location of directory scanned for XSD files.
+     * Location of directory scanned for XSD files. If the value is the filename of a single file, only that file will be converted, even if the directory the file resides in, contains multiple xsd files
      */
     @Parameter(defaultValue = "${project.basedir}/src/main/xsd", property = "xsd.input.directory", required = true )
     String xsdInputDirectory;
@@ -102,7 +103,11 @@ public class XsdRngConverterMojo extends AbstractMojo {
 
     List<File> findXsdFiles() {
         var xsdDirectory = new File(xsdInputDirectory);
-        return Arrays.asList(xsdDirectory.listFiles(xsdFileFilter));
+        if (Files.isDirectory(xsdDirectory.toPath())) {
+            return Arrays.asList(xsdDirectory.listFiles(xsdFileFilter));
+        }
+
+        return Collections.singletonList(xsdDirectory);
     }
 
     File convertXsdFileNameToRngFileName(File xsdFile) {

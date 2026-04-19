@@ -106,6 +106,24 @@ class XsdRngConverterMojoTest {
     }
 
     @Test
+    void testConvertSingleXsdFileToRngAndRncFiles() throws Exception {
+        var mojo = new XsdRngConverterMojo();
+        mojo.xsdInputDirectory = new File(getClass().getClassLoader().getResource("xsd/xhtml1-strict.xsd").getFile()).getPath();
+        mojo.rngOutputDirectory = testProperties.getProperty("testOutputDirectory");
+        mojo.rncOutputDirectory = testProperties.getProperty("testRncOutputDirectory");
+
+        mojo.execute();
+
+        var rngFiles = new File(mojo.rngOutputDirectory).listFiles(rngFileFilter);
+        assertThat(rngFiles).hasSize(1);
+        assertDoesNotThrow(() -> parseXmlFile(rngFiles[0])); // Verify generated file is XML file
+
+        var rncFiles = new File(mojo.rncOutputDirectory).listFiles(rncFileFilter);
+        assertThat(rncFiles).hasSize(1);
+        parseRncFile(rncFiles[0]);
+    }
+
+    @Test
     void testMojoWithErrorOnTargetDirectoryCreate() {
         var mojo = new XsdRngConverterMojo();
         mojo.rngOutputDirectory = "/not/found/dummy/directory";
