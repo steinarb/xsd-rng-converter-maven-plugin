@@ -1,15 +1,10 @@
 * A maven plugin to convert XSD schemas to RNG schemas
 
-This project contains a maven plugin for converting XSD schema files into Relax-NG schema files.
+This project contains a maven plugin for converting [[https://en.wikipedia.org/wiki/XML_Schema_(W3C)][XSD]] schema files into [[https://en.wikipedia.org/wiki/RELAX_NG][Relax-NG]] schema files.
 
-It uses [[https://github.com/kohsuke/msv][Kohsuke Kawaguchi's Multi Schema Validator]] (aka. "The Sun schema converter") to do the conversion.
-
-I had planned to use the [[http://www.mojohaus.org/exec-maven-plugin/java-mojo.html][exec-maven-plugin exec:java]] goal to run the [[https://github.com/kohsuke/msv/blob/master/rngconverter/src/main/java/com/sun/msv/writer/relaxng/Driver.java#L31][RNGCOnverter main]], but that would only let me convert a single XSD file per maven project (or per POM execution configuration).  And using the [[http://maven.apache.org/plugins/maven-antrun-plugin/][maven-antrun-plugin]] seemed like it would be as much work as simply writing a mojo.
-
-So writing a new mojo is what I did.
+This plugin looks for all .xsd files in a single directory, and then transforms them into .rng (Relax-NG XML notation) files in a different directory. The .rng files are then converted into .rnc (Relax-NG compact notation) files, that are put in a third directory.
 
 ** Status
-
 [[https://github.com/steinarb/xsd-rng-converter-maven-plugin/actions/workflows/xsd-rng-converter-maven-plugin-maven-ci-build.yml][file:https://github.com/steinarb/xsd-rng-converter-maven-plugin/actions/workflows/xsd-rng-converter-maven-plugin-maven-ci-build.yml/badge.svg]]
 [[https://coveralls.io/github/steinarb/xsd-rng-converter-maven-plugin][file:https://coveralls.io/repos/github/steinarb/xsd-rng-converter-maven-plugin/badge.svg]]
 [[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=alert_status#.svg]]
@@ -27,7 +22,6 @@ So writing a new mojo is what I did.
 [[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=vulnerabilities#.svg]]
 [[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_xsd-rng-converter-maven-plugin&metric=duplicated_lines_density#.svg]]
 [[https://sonarcloud.io/summary/new_code?id=steinarb_xsd-rng-converter-maven-plugin][file:https://sonarcloud.io/api/project_badges/measure?project=steinarb_authservice&metric=reliability_rating#.svg]]
-
 
 ** Using the plugin
 
@@ -79,6 +73,16 @@ Procedure:
     #+end_example
  5. The Relax-NG schemas converted from XSD schemas in =/tmp/xsdconvert/src/main/xsd/= can now be found in =/home/xsdconvert/target/classes/rng/=
 
+** About the plugin
+This plugin uses what was originally [[https://github.com/kohsuke/msv][Kohsuke Kawaguchi's Multi Schema Validator]] (aka. "The Sun schema converter") to do the conversion from XSD to RNG (Relax-NG XML Notation).
+
+The plugin then uses [[https://relaxng.org/jclark/trang.html][trang]] to convert the RNG files converted from XSD, into [[https://relaxng.org/compact-tutorial-20030326.html][Relax-NG compact notation files]].
+
+I had planned to use the [[http://www.mojohaus.org/exec-maven-plugin/java-mojo.html][exec-maven-plugin exec:java]] goal to run the [[https://github.com/kohsuke/msv/blob/master/rngconverter/src/main/java/com/sun/msv/writer/relaxng/Driver.java#L31][RNGCOnverter main]], but that would only let me convert a single XSD file per maven project (or per POM execution configuration).  And using the [[http://maven.apache.org/plugins/maven-antrun-plugin/][maven-antrun-plugin]] seemed like it would be as much work as simply writing a mojo.
+
+So writing a new mojo is what I did.
+
+** Release history
 ** License
 
 The xsd-rng-converter-maven-plugin is licensed under the Apache license v. 2.
