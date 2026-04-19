@@ -102,7 +102,6 @@ class XsdRngConverterMojoTest {
 
         var rncFiles = new File(mojo.rncOutputDirectory).listFiles(rncFileFilter);
         assertThat(rncFiles).hasSize(1);
-        //assertDoesNotThrow(() -> parseRncFile(rncFiles[0])); // Verify generated file is actual Relax-NG compact notation schema
         parseRncFile(rncFiles[0]);
     }
 
