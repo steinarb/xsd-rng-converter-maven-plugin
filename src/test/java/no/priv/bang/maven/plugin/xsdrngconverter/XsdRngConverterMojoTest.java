@@ -105,22 +105,6 @@ class XsdRngConverterMojoTest {
         parseRncFile(rncFiles[0]);
     }
 
-    private Document parseXmlFile(File file) throws Exception {
-        var factory = DocumentBuilderFactory.newInstance();
-        var builder = factory.newDocumentBuilder();
-        return builder.parse(file);
-    }
-
-    private boolean parseRncFile(File rncFile) throws Exception {
-        var errorhandler = new ErrorHandlerImpl();
-        var propertymapBuilder = new PropertyMapBuilder();
-        propertymapBuilder.put(ValidateProperty.ERROR_HANDLER, errorhandler);
-        var schemaReader = CompactSchemaReader.getInstance();
-        var validationDriver = new ValidationDriver(propertymapBuilder.toPropertyMap(), schemaReader);
-        var inputSource = new InputSource(new FileInputStream(rncFile));
-        return validationDriver.loadSchema(inputSource);
-    }
-
     @Test
     void testMojoWithErrorOnTargetDirectoryCreate() {
         var mojo = new XsdRngConverterMojo();
@@ -187,6 +171,22 @@ class XsdRngConverterMojoTest {
         assertThat(mojo.maybeStripVersionNumber("xhtml1-strict.rng")).isEqualTo("xhtml1-strict.rng");
         assertThat(mojo.maybeStripVersionNumber("maven-v4_0_0.rng")).isEqualTo("maven-v4_0_0.rng");
         assertThat(mojo.maybeStripVersionNumber("antproject.rng")).isEqualTo("antproject.rng");
+    }
+
+    private Document parseXmlFile(File file) throws Exception {
+        var factory = DocumentBuilderFactory.newInstance();
+        var builder = factory.newDocumentBuilder();
+        return builder.parse(file);
+    }
+
+    private boolean parseRncFile(File rncFile) throws Exception {
+        var errorhandler = new ErrorHandlerImpl();
+        var propertymapBuilder = new PropertyMapBuilder();
+        propertymapBuilder.put(ValidateProperty.ERROR_HANDLER, errorhandler);
+        var schemaReader = CompactSchemaReader.getInstance();
+        var validationDriver = new ValidationDriver(propertymapBuilder.toPropertyMap(), schemaReader);
+        var inputSource = new InputSource(new FileInputStream(rncFile));
+        return validationDriver.loadSchema(inputSource);
     }
 
 }
